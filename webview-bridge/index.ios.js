@@ -33,14 +33,12 @@ var {
   requireNativeComponent,
   UIManager,
   NativeModules: {
-    WebViewBridgeManager
+    ALZWebViewBridgeManager
   }
 } = ReactNative;
 
 var BGWASH = 'rgba(255,255,255,0.8)';
 var RCT_WEBVIEWBRIDGE_REF = 'webviewbridge';
-
-var ALZWebViewBridgeManager = WebViewBridgeManager;
 
 var WebViewBridgeState = keyMirror({
   IDLE: null,
