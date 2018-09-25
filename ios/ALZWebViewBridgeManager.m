@@ -96,7 +96,7 @@ RCT_EXPORT_METHOD(goBack:(nonnull NSNumber *)reactTag)
 RCT_EXPORT_METHOD(goForward:(nonnull NSNumber *)reactTag)
 {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-    ALZWebViewBridge view = viewRegistry[reactTag];
+    ALZWebViewBridge *view = viewRegistry[reactTag];
     if (![view isKindOfClass:[ALZWebViewBridge class]]) {
       RCTLogError(@"Invalid view returned from registry, expecting ALZWebViewBridge, got: %@", view);
     } else {
