@@ -229,7 +229,7 @@ var WebViewBridge = createReactClass({
   },
 
   sendToBridge: function (message: string) {
-    WebViewBridgeManager.sendToBridge(this.getWebViewBridgeHandle(), message);
+    ALZWebViewBridgeManager.sendToBridge(this.getWebViewBridgeHandle(), message);
   },
 
   /**
