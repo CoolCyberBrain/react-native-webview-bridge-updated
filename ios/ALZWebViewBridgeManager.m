@@ -10,8 +10,8 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import "RCTWebViewBridgeManager.h"
-#import "RCTWebViewBridge.h"
+#import "ALZWebViewBridgeManager.h"
+#import "ALZWebViewBridge.h"
 
 #if __has_include(<React/RCTBridge.h>)
 #import <React/RCTBridge.h>
@@ -31,11 +31,11 @@
 #import "UIView+React.h"
 #endif
 
-@interface RCTWebViewBridgeManager () <RCTWebViewBridgeDelegate>
+@interface ALZWebViewBridgeManager () <ALZWebViewBridgeDelegate>
 
 @end
 
-@implementation RCTWebViewBridgeManager
+@implementation ALZWebViewBridgeManager
 {
   NSConditionLock *_shouldStartLoadLock;
   BOOL _shouldStartLoad;
@@ -45,7 +45,7 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-  RCTWebViewBridge *webView = [RCTWebViewBridge new];
+  ALZWebViewBridge *webView = [ALZWebViewBridge new];
   webView.delegate = self;
   return webView;
 }
@@ -83,10 +83,10 @@ RCT_REMAP_VIEW_PROPERTY(keyboardDisplayRequiresUserAction, _webView.keyboardDisp
 
 RCT_EXPORT_METHOD(goBack:(nonnull NSNumber *)reactTag)
 {
-  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTWebViewBridge *> *viewRegistry) {
-    RCTWebViewBridge *view = viewRegistry[reactTag];
-    if (![view isKindOfClass:[RCTWebViewBridge class]]) {
-      RCTLogError(@"Invalid view returned from registry, expecting RCTWebViewBridge, got: %@", view);
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, ALZWebViewBridge *> *viewRegistry) {
+    ALZWebViewBridge *view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[ALZWebViewBridge class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting ALZWebViewBridge, got: %@", view);
     } else {
       [view goBack];
     }
@@ -97,8 +97,8 @@ RCT_EXPORT_METHOD(goForward:(nonnull NSNumber *)reactTag)
 {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
     id view = viewRegistry[reactTag];
-    if (![view isKindOfClass:[RCTWebViewBridge class]]) {
-      RCTLogError(@"Invalid view returned from registry, expecting RCTWebViewBridge, got: %@", view);
+    if (![view isKindOfClass:[ALZWebViewBridge class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting ALZWebViewBridge, got: %@", view);
     } else {
       [view goForward];
     }
@@ -107,10 +107,10 @@ RCT_EXPORT_METHOD(goForward:(nonnull NSNumber *)reactTag)
 
 RCT_EXPORT_METHOD(reload:(nonnull NSNumber *)reactTag)
 {
-  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTWebViewBridge *> *viewRegistry) {
-    RCTWebViewBridge *view = viewRegistry[reactTag];
-    if (![view isKindOfClass:[RCTWebViewBridge class]]) {
-      RCTLogError(@"Invalid view returned from registry, expecting RCTWebViewBridge, got: %@", view);
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, ALZWebViewBridge *> *viewRegistry) {
+    ALZWebViewBridge *view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[ALZWebViewBridge class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting ALZWebViewBridge, got: %@", view);
     } else {
       [view reload];
     }
@@ -120,10 +120,10 @@ RCT_EXPORT_METHOD(reload:(nonnull NSNumber *)reactTag)
 RCT_EXPORT_METHOD(sendToBridge:(nonnull NSNumber *)reactTag
                   value:(NSString*)message)
 {
-  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTWebViewBridge *> *viewRegistry) {
-    RCTWebViewBridge *view = viewRegistry[reactTag];
-    if (![view isKindOfClass:[RCTWebViewBridge class]]) {
-      RCTLogError(@"Invalid view returned from registry, expecting RCTWebViewBridge, got: %@", view);
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, ALZWebViewBridge *> *viewRegistry) {
+    ALZWebViewBridge *view = viewRegistry[reactTag];
+    if (![view isKindOfClass:[ALZWebViewBridge class]]) {
+      RCTLogError(@"Invalid view returned from registry, expecting ALZWebViewBridge, got: %@", view);
     } else {
       [view sendToBridge: message];
     }
@@ -132,7 +132,7 @@ RCT_EXPORT_METHOD(sendToBridge:(nonnull NSNumber *)reactTag
 
 #pragma mark - Exported synchronous methods
 
-- (BOOL)webView:(__unused RCTWebViewBridge *)webView
+- (BOOL)webView:(__unused ALZWebViewBridge *)webView
 shouldStartLoadForRequest:(NSMutableDictionary<NSString *, id> *)request
    withCallback:(RCTDirectEventBlock)callback
 {
