@@ -16,7 +16,7 @@
 #import "RCTView.h"
 #endif
     
-@class RCTWebViewBridge;
+@class ALZWebViewBridge;
 
 /**
  * Special scheme used to pass messages to the injectedJavaScript
@@ -26,17 +26,17 @@
  */
 extern NSString *const RCTJSNavigationScheme;
 
-@protocol RCTWebViewBridgeDelegate <NSObject>
+@protocol ALZWebViewBridgeDelegate <NSObject>
 
-- (BOOL)webView:(RCTWebViewBridge *)webView
+- (BOOL)webView:(ALZWebViewBridge *)webView
 shouldStartLoadForRequest:(NSMutableDictionary<NSString *, id> *)request
    withCallback:(RCTDirectEventBlock)callback;
 
 @end
 
-@interface RCTWebViewBridge : RCTView
+@interface ALZWebViewBridge : RCTView
 
-@property (nonatomic, weak) id<RCTWebViewBridgeDelegate> delegate;
+@property (nonatomic, weak) id<ALZWebViewBridgeDelegate> delegate;
 
 @property (nonatomic, copy) NSDictionary *source;
 @property (nonatomic, assign) UIEdgeInsets contentInset;

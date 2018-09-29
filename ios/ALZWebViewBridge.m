@@ -10,7 +10,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import "RCTWebViewBridge.h"
+#import "ALZWebViewBridge.h"
 
 #import <UIKit/UIKit.h>
 
@@ -58,7 +58,7 @@
 
 //we don'e need this one since it has been defined in RCTWebView.m
 //NSString *const RCTJSNavigationScheme = @"react-js-navigation";
-NSString *const RCTWebViewBridgeSchema = @"wvb";
+NSString *const ALZWebViewBridgeSchema = @"wvb";
 
 // runtime trick to remove UIWebview keyboard default toolbar
 // see: http://stackoverflow.com/questions/19033292/ios-7-uiwebview-keyboard-issue/19042279#19042279
@@ -70,7 +70,7 @@ NSString *const RCTWebViewBridgeSchema = @"wvb";
 }
 @end
 
-@interface RCTWebViewBridge () <UIWebViewDelegate, RCTAutoInsetsProtocol>
+@interface ALZWebViewBridge () <UIWebViewDelegate, RCTAutoInsetsProtocol>
 
 @property (nonatomic, copy) RCTDirectEventBlock onLoadingStart;
 @property (nonatomic, copy) RCTDirectEventBlock onLoadingFinish;
@@ -80,7 +80,7 @@ NSString *const RCTWebViewBridgeSchema = @"wvb";
 
 @end
 
-@implementation RCTWebViewBridge
+@implementation ALZWebViewBridge
 {
   UIWebView *_webView;
   NSString *_injectedJavaScript;
@@ -251,7 +251,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 {
   BOOL isJSNavigation = [request.URL.scheme isEqualToString:RCTJSNavigationScheme];
 
-  if (!isJSNavigation && [request.URL.scheme isEqualToString:RCTWebViewBridgeSchema]) {
+  if (!isJSNavigation && [request.URL.scheme isEqualToString:ALZWebViewBridgeSchema]) {
     NSString* message = [webView stringByEvaluatingJavaScriptFromString:@"WebViewBridge.__fetch__()"];
 
     NSMutableDictionary<NSString *, id> *onBridgeMessageEvent = [[NSMutableDictionary alloc] initWithDictionary:@{

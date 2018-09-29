@@ -33,14 +33,12 @@ var {
   requireNativeComponent,
   UIManager,
   NativeModules: {
-    WebViewBridgeManager
+    ALZWebViewBridgeManager
   }
 } = ReactNative;
 
 var BGWASH = 'rgba(255,255,255,0.8)';
 var RCT_WEBVIEWBRIDGE_REF = 'webviewbridge';
-
-var RCTWebViewBridgeManager = WebViewBridgeManager;
 
 var WebViewBridgeState = keyMirror({
   IDLE: null,
@@ -49,15 +47,15 @@ var WebViewBridgeState = keyMirror({
 });
 
 var NavigationType = {
-  click: RCTWebViewBridgeManager.NavigationType.LinkClicked,
-  formsubmit: RCTWebViewBridgeManager.NavigationType.FormSubmitted,
-  backforward: RCTWebViewBridgeManager.NavigationType.BackForward,
-  reload: RCTWebViewBridgeManager.NavigationType.Reload,
-  formresubmit: RCTWebViewBridgeManager.NavigationType.FormResubmitted,
-  other: RCTWebViewBridgeManager.NavigationType.Other,
+  click: ALZWebViewBridgeManager.NavigationType.LinkClicked,
+  formsubmit: ALZWebViewBridgeManager.NavigationType.FormSubmitted,
+  backforward: ALZWebViewBridgeManager.NavigationType.BackForward,
+  reload: ALZWebViewBridgeManager.NavigationType.Reload,
+  formresubmit: ALZWebViewBridgeManager.NavigationType.FormResubmitted,
+  other: ALZWebViewBridgeManager.NavigationType.Other,
 };
 
-var JSNavigationScheme = RCTWebViewBridgeManager.JSNavigationScheme;
+var JSNavigationScheme = ALZWebViewBridgeManager.JSNavigationScheme;
 
 type ErrorEvent = {
   domain: any;
@@ -143,7 +141,7 @@ var WebViewBridge = createReactClass({
       );
     } else if (this.state.viewState !== WebViewBridgeState.IDLE) {
       console.error(
-        'RCTWebViewBridge invalid state encountered: ' + this.state.loading
+        'ALZWebViewBridge invalid state encountered: ' + this.state.loading
       );
     }
 
@@ -157,7 +155,7 @@ var WebViewBridge = createReactClass({
     var onShouldStartLoadWithRequest = this.props.onShouldStartLoadWithRequest && ((event: Event) => {
       var shouldStart = this.props.onShouldStartLoadWithRequest &&
         this.props.onShouldStartLoadWithRequest(event.nativeEvent);
-      RCTWebViewBridgeManager.startLoadWithResult(!!shouldStart, event.nativeEvent.lockIdentifier);
+      ALZWebViewBridgeManager.startLoadWithResult(!!shouldStart, event.nativeEvent.lockIdentifier);
     });
 
     var {javaScriptEnabled, domStorageEnabled} = this.props;
@@ -185,7 +183,7 @@ var WebViewBridge = createReactClass({
     delete props.onShouldStartLoadWithRequest;
 
     var webView =
-      <RCTWebViewBridge
+      <ALZWebViewBridge
         ref={RCT_WEBVIEWBRIDGE_REF}
         key="webViewKey"
         {...props}
@@ -209,7 +207,7 @@ var WebViewBridge = createReactClass({
   goForward: function() {
     UIManager.dispatchViewManagerCommand(
       this.getWebViewBridgeHandle(),
-      UIManager.RCTWebViewBridge.Commands.goForward,
+      UIManager.ALZWebViewBridge.Commands.goForward,
       null
     );
   },
@@ -217,7 +215,7 @@ var WebViewBridge = createReactClass({
   goBack: function() {
     UIManager.dispatchViewManagerCommand(
       this.getWebViewBridgeHandle(),
-      UIManager.RCTWebViewBridge.Commands.goBack,
+      UIManager.ALZWebViewBridge.Commands.goBack,
       null
     );
   },
@@ -225,13 +223,13 @@ var WebViewBridge = createReactClass({
   reload: function() {
     UIManager.dispatchViewManagerCommand(
       this.getWebViewBridgeHandle(),
-      UIManager.RCTWebViewBridge.Commands.reload,
+      UIManager.ALZWebViewBridge.Commands.reload,
       null
     );
   },
 
   sendToBridge: function (message: string) {
-    WebViewBridgeManager.sendToBridge(this.getWebViewBridgeHandle(), message);
+    ALZWebViewBridgeManager.sendToBridge(this.getWebViewBridgeHandle(), message);
   },
 
   /**
@@ -278,7 +276,7 @@ var WebViewBridge = createReactClass({
   },
 });
 
-var RCTWebViewBridge = requireNativeComponent('RCTWebViewBridge', WebViewBridge, {
+var ALZWebViewBridge = requireNativeComponent('ALZWebViewBridge', WebViewBridge, {
   nativeOnly: {
     onLoadingStart: true,
     onLoadingError: true,

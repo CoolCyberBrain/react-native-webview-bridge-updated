@@ -16,6 +16,6 @@
 #import "RCTViewManager.h"
 #endif
 
-@interface RCTWebViewBridgeManager : RCTViewManager
+@interface ALZWebViewBridgeManager : RCTViewManager
 
 @end
