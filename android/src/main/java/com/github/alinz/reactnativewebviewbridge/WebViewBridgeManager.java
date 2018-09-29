@@ -37,6 +37,7 @@ public class WebViewBridgeManager extends ReactWebViewManager {
     protected WebView createViewInstance(ThemedReactContext reactContext) {
         WebView root = super.createViewInstance(reactContext);
         root.addJavascriptInterface(new JavascriptBridge(root), "WebViewBridge");
+        root.requestFocus();
         return root;
     }
 
